@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# Wrapper based on MiteshShah script
+# Wrapper based on @MiteshShah script
 # https://github.com/rtCamp/easyengine/issues/3
 #
 
@@ -11,7 +11,8 @@
 # Start supervising the config
 while true
 do
-    inotifywait --exclude .swp -e create  /etc/nginx/sites-enabled
+    # Reload Nginx When File creted/modified/deleted/moved on /etc/nginx/sites-enabled
+    inotifywait --exclude .swp -e create -e modify -e delete -e move  /etc/nginx/sites-enabled
     nginx -t
     if [ $? -eq 0 ]
     then
